@@ -1,0 +1,96 @@
+---
+const steps = [
+  {
+    step: "01",
+    title: "Diagnóstico",
+    icon: "search",
+    desc: "Evaluación técnica detallada de tus necesidades y cumplimiento normativo actual. Identificamos oportunidades de mejora.",
+    cta: "Solicitar Diagnóstico"
+  },
+  {
+    step: "02",
+    title: "Propuesta",
+    icon: "file-text",
+    desc: "Diseño de solución personalizada con presupuesto transparente y cronograma de ejecución optimizado.",
+    cta: "Ver Modelo"
+  },
+  {
+    step: "03",
+    title: "Ejecución",
+    icon: "settings",
+    desc: "Implementación del servicio con personal calificado, EPPs certificados y supervisión constante.",
+    cta: "Conocer Equipo"
+  },
+  {
+    step: "04",
+    title: "Certificación",
+    icon: "award",
+    desc: "Entrega de certificados de disposición final y manifiestos validados por DIGESA/OEFA.",
+    cta: "Ver Ejemplo"
+  }
+];
+---
+
+<section class="py-32 relative bg-black">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-20">
+            <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
+                Nuestro <span class="text-eco-emerald">Proceso</span>
+            </h2>
+            <p class="text-white/50 text-lg max-w-2xl mx-auto">
+                Metodología probada para garantizar cumplimiento y eficiencia en cada etapa.
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {steps.map((item) => (
+                <div class="group h-[400px] perspective-1000">
+                    <div class="relative w-full h-full transition-all duration-700 transform-style-3d group-hover:rotate-y-180">
+                        
+                        <!-- Front Face -->
+                        <div class="absolute inset-0 w-full h-full backface-hidden rounded-3xl bg-white/5 border border-white/10 p-8 flex flex-col items-center justify-center text-center backdrop-blur-sm group-hover:border-eco-emerald/50 transition-colors">
+                            <div class="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-8 group-hover:bg-eco-emerald/20 transition-colors">
+                                <span class="text-3xl font-bold text-white/20 group-hover:text-eco-emerald transition-colors">{item.step}</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-4">{item.title}</h3>
+                            <div class="w-12 h-1 bg-eco-emerald/50 rounded-full"></div>
+                            
+                            <div class="absolute bottom-8 text-xs text-white/30 uppercase tracking-widest font-medium">
+                                Ver Detalles
+                            </div>
+                        </div>
+
+                        <!-- Back Face -->
+                        <div class="absolute inset-0 w-full h-full backface-hidden rotate-y-180 rounded-3xl bg-eco-emerald p-8 flex flex-col items-center justify-center text-center">
+                            <h3 class="text-xl font-bold text-black mb-4">{item.title}</h3>
+                            <p class="text-black/80 leading-relaxed mb-8">
+                                {item.desc}
+                            </p>
+                            <a href="#contacto" class="px-6 py-2 rounded-xl bg-black text-white font-medium hover:bg-black/80 transition-colors text-sm">
+                                {item.cta}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    </div>
+</section>
+
+<style>
+    .perspective-1000 {
+        perspective: 1000px;
+    }
+    
+    .transform-style-3d {
+        transform-style: preserve-3d;
+    }
+    
+    .backface-hidden {
+        backface-visibility: hidden;
+    }
+    
+    .rotate-y-180 {
+        transform: rotateY(180deg);
+    }
+</style>

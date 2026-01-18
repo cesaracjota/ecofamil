@@ -1,0 +1,145 @@
+---
+const projects = [
+    {
+        title: "Gestión de Residuos Mineros",
+        client: "Minera Las Bambas",
+        image: "https://images.unsplash.com/photo-1579547621113-e4bb2a19bdd6?q=80&w=2539&auto=format&fit=crop",
+        desc: "Implementación de sistema integral para el manejo de residuos peligrosos en zona de alta montaña.",
+    },
+    {
+        title: "Limpieza Industrial Planta Concentradora",
+        client: "Antapaccay",
+        image: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=2670&auto=format&fit=crop",
+        desc: "Servicio de limpieza y mantenimiento de equipos críticos de procesamiento.",
+    },
+    {
+        title: "Transporte de Materiales Peligrosos",
+        client: "Hudbay Perú",
+        image: "https://images.unsplash.com/photo-1586191582118-274e996a6966?q=80&w=2670&auto=format&fit=crop",
+        desc: "Logística especializada para el transporte seguro de insumos químicos controlados.",
+    },
+    {
+        title: "Saneamiento Ambiental",
+        client: "Gobierno Regional Cusco",
+        image: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?q=80&w=2670&auto=format&fit=crop",
+        desc: "Campaña de saneamiento y gestión de residuos en comunidades aledañas.",
+    },
+];
+---
+
+<section
+    id="proyectos"
+    class="py-24 bg-slate-50 dark:bg-slate-900 overflow-hidden transition-colors duration-300"
+>
+    <div
+        class="container mx-auto px-6 mb-12 flex flex-col md:flex-row justify-between items-end gap-6"
+    >
+        <div class="reveal-on-scroll text-slate-900 dark:text-white">
+            <span
+                class="text-ecogreen font-semibold tracking-wider uppercase text-sm block mb-4"
+            >
+                Experiencia Comprobada
+            </span>
+            <h2 class="text-3xl md:text-5xl font-display font-bold">
+                Proyectos Destacados
+            </h2>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="flex gap-4 reveal-on-scroll delay-200">
+            <button
+                id="prev-btn"
+                class="p-3 rounded-full border border-slate-300 dark:border-white/20 text-slate-600 dark:text-white hover:bg-ecogreen hover:border-ecogreen hover:text-white transition-all"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-arrow-left"
+                    ><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"
+                    ></path></svg
+                >
+            </button>
+            <button
+                id="next-btn"
+                class="p-3 rounded-full border border-slate-300 dark:border-white/20 text-slate-600 dark:text-white hover:bg-ecogreen hover:border-ecogreen hover:text-white transition-all"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-arrow-right"
+                    ><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"
+                    ></path></svg
+                >
+            </button>
+        </div>
+    </div>
+
+    <!-- Carousel Container -->
+    <div class="pl-6 md:pl-[max(1.5rem,calc((100vw-1280px)/2+1.5rem))]">
+        <div
+            id="gallery-slider"
+            class="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-12 scrollbar-hide pr-6"
+            style="scrollbar-width: none; -ms-overflow-style: none;"
+        >
+            {
+                projects.map((project, index) => (
+                    <div
+                        class="min-w-[85vw] md:min-w-[400px] lg:min-w-[500px] snap-center group relative rounded-2xl overflow-hidden aspect-[4/5] md:aspect-[3/4] cursor-pointer reveal-on-scroll translate-x-12 opacity-0 transition-all duration-700"
+                        style={`transition-delay: ${index * 150}ms`}
+                    >
+                        <div class="absolute inset-0">
+                            <img
+                                src={project.image}
+                                alt={project.title}
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                            />
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+                        </div>
+
+                        <div class="absolute bottom-0 left-0 w-full p-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                            <span class="inline-block px-3 py-1 bg-ecogreen text-white text-xs font-bold rounded-full mb-3 shadow-lg">
+                                {project.client}
+                            </span>
+                            <h3 class="text-2xl font-bold text-white mb-3">
+                                {project.title}
+                            </h3>
+                            <p class="text-slate-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                                {project.desc}
+                            </p>
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<script>
+    const slider = document.getElementById("gallery-slider");
+    const prevBtn = document.getElementById("prev-btn");
+    const nextBtn = document.getElementById("next-btn");
+
+    if (slider && prevBtn && nextBtn) {
+        prevBtn.addEventListener("click", () => {
+            slider.scrollBy({ left: -400, behavior: "smooth" });
+        });
+
+        nextBtn.addEventListener("click", () => {
+            slider.scrollBy({ left: 400, behavior: "smooth" });
+        });
+    }
+</script>

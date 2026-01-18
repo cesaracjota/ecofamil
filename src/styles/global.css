@@ -1,0 +1,230 @@
+@import "tailwindcss";
+
+/* ============================================
+   DARK EMERALD PROFESSIONAL THEME
+   ============================================ */
+
+@layer base {
+    :root {
+        color-scheme: dark;
+        /* Pure Black Base - NO green tints */
+        --bg-primary: #000000;
+        /* Pure black */
+        --bg-secondary: #0a0a0a;
+        /* Almost black */
+        --bg-card: #1a1a1a;
+        /* Dark gray for cards */
+
+        /* Emerald System - ONLY for accents */
+        --emerald-base: #059669;
+        /* emerald-600 */
+        --emerald-light: #34d399;
+        /* emerald-400 */
+        --emerald-dark: #047857;
+        /* emerald-700 */
+
+        /* Text */
+        --text-primary: #ffffff;
+        /* Pure white */
+        --text-secondary: #a3a3a3;
+        /* Neutral gray */
+        --text-muted: #737373;
+        /* Muted gray */
+    }
+
+    html {
+        scroll-behavior: smooth;
+        font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        background-color: var(--bg-primary);
+    }
+
+    body {
+        background-color: #000000;
+        /* Pure black */
+        color: var(--text-primary);
+        font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-weight: 400;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+        font-feature-settings: 'kern' 1;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        color: var(--text-primary);
+    }
+
+    /* Extra bold for h1 and h2 */
+    h1 {
+        font-weight: 700;
+        letter-spacing: -0.03em;
+    }
+
+    h2 {
+        font-weight: 700;
+        letter-spacing: -0.025em;
+    }
+
+    /* Stronger emphasis for bold text */
+    strong,
+    b {
+        font-weight: 700;
+    }
+
+    /* Medium weight for emphasis */
+    em {
+        font-weight: 500;
+        font-style: italic;
+    }
+
+    /* Improve readability for paragraphs */
+    p {
+        font-weight: 400;
+        line-height: 1.7;
+        letter-spacing: -0.01em;
+    }
+}
+
+/* ============================================
+   PREMIUM COMPONENTS
+   ============================================ */
+
+@layer components {
+
+    /* Glass Effect - Pure black base */
+    .glass-dark {
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Emerald Glow Effect */
+    .glow-emerald {
+        box-shadow: 0 0 20px rgba(5, 150, 105, 0.3),
+            0 0 40px rgba(5, 150, 105, 0.1);
+    }
+
+    .glow-emerald-hover {
+        transition: box-shadow 0.3s ease;
+    }
+
+    .glow-emerald-hover:hover {
+        box-shadow: 0 0 30px rgba(5, 150, 105, 0.5),
+            0 0 60px rgba(5, 150, 105, 0.2),
+            0 0 80px rgba(5, 150, 105, 0.1);
+    }
+
+    /* Card Hover Effect */
+    .card-hover {
+        transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .card-hover:hover {
+        transform: translateY(-4px);
+        border-color: var(--emerald-base);
+    }
+
+    /* Image Zoom on Hover */
+    .image-zoom {
+        overflow: hidden;
+    }
+
+    .image-zoom img {
+        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .image-zoom:hover img {
+        transform: scale(1.1);
+    }
+
+    /* Premium Button */
+    .btn-emerald {
+        background: linear-gradient(135deg, var(--emerald-base), var(--emerald-light));
+        color: white;
+        padding: 0.875rem 2rem;
+        border-radius: 0.75rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 14px 0 rgba(5, 150, 105, 0.3);
+    }
+
+    .btn-emerald:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px 0 rgba(5, 150, 105, 0.4);
+    }
+
+    /* Gradient Overlay */
+    .overlay-gradient {
+        background: linear-gradient(to bottom,
+                rgba(2, 6, 23, 0.8),
+                rgba(4, 120, 87, 0.3),
+                transparent);
+    }
+}
+
+/* ============================================
+   UTILITIES
+   ============================================ */
+
+@layer utilities {
+
+    /* Text Gradients */
+    .text-emerald-gradient {
+        background: linear-gradient(135deg, #34d399, #059669);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    /* Smooth Transitions */
+    .transition-smooth {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+}
+
+/* ============================================
+   SCROLLBAR
+   ============================================ */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--emerald-dark);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--emerald-base);
+}
+
+/* ============================================
+   LENIS SMOOTH SCROLL
+   ============================================ */
+
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+
+.lenis.lenis-stopped {
+    overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+    pointer-events: none;
+}

@@ -1,0 +1,216 @@
+---
+import { Image } from "astro:assets";
+import heroBg1 from "../assets/hero-bg.png";
+import heroBg2 from "../assets/hero-bg-2.png";
+
+const heroImages = [
+    { src: heroBg1, alt: "Equipo Ecofamil y Flota de Vehículos" },
+    { src: heroBg2, alt: "Planta de Reciclaje y Gestión de Residuos" },
+];
+---
+
+<section
+    class="relative min-h-screen flex items-center justify-center overflow-hidden"
+>
+    <!-- Background Images Carousel -->
+    <div class="absolute inset-0 z-0">
+        {
+            heroImages.map((img, index) => (
+                <div
+                    class={`hero-bg absolute inset-0 transition-opacity duration-1000 ${index === 0 ? "opacity-100" : "opacity-0"}`}
+                    data-index={index}
+                >
+                    <Image
+                        src={img.src}
+                        alt={img.alt}
+                        class="w-full h-full object-cover"
+                        loading={index === 0 ? "eager" : "lazy"}
+                        width={1920}
+                        height={1080}
+                    />
+                </div>
+            ))
+        }
+    </div>
+
+    <!-- Enhanced Gradient Overlay for Text Readability -->
+    <div
+        class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/70 z-10"
+    >
+    </div>
+
+    <!-- Additional Vignette Effect -->
+    <div
+        class="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-black/60 z-10"
+    >
+    </div>
+
+    <!-- Content -->
+    <div class="relative z-20 container mx-auto px-6 text-center">
+        <div class="max-w-4xl mx-auto space-y-8">
+            <!-- Main Headline -->
+            <h1
+                class="text-5xl md:text-7xl font-bold tracking-tight leading-tight reveal opacity-0 translate-y-8 transition-all duration-700 drop-shadow-2xl"
+            >
+                Expertos en <span class="text-emerald-gradient"
+                    >Gestión Integral</span
+                > de Residuos
+            </h1>
+
+            <!-- Subtext -->
+            <p
+                class="text-xl md:text-2xl text-slate-200 max-w-2xl mx-auto reveal opacity-0 translate-y-8 transition-all duration-700 delay-100 drop-shadow-lg"
+            >
+                Tu socio confiable en la gestión medioambiental y limpieza
+                industrial
+            </p>
+
+            <!-- Stats Row -->
+            <div
+                class="grid grid-cols-3 gap-4 md:gap-8 max-w-3xl mx-auto py-8 reveal opacity-0 translate-y-8 transition-all duration-700 delay-200"
+            >
+                <div class="text-center">
+                    <div
+                        class="text-4xl md:text-5xl font-bold text-emerald-400 drop-shadow-lg"
+                    >
+                        +10
+                    </div>
+                    <div
+                        class="text-sm md:text-base text-slate-300 mt-1 drop-shadow"
+                    >
+                        Años de Experiencia
+                    </div>
+                </div>
+                <div class="text-center">
+                    <div
+                        class="text-4xl md:text-5xl font-bold text-emerald-400 drop-shadow-lg"
+                    >
+                        500+
+                    </div>
+                    <div
+                        class="text-sm md:text-base text-slate-300 mt-1 drop-shadow"
+                    >
+                        Clientes Satisfechos
+                    </div>
+                </div>
+                <div class="text-center">
+                    <div
+                        class="text-4xl md:text-5xl font-bold text-emerald-400 drop-shadow-lg"
+                    >
+                        24/7
+                    </div>
+                    <div
+                        class="text-sm md:text-base text-slate-300 mt-1 drop-shadow"
+                    >
+                        Disponibilidad
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Button -->
+        <div
+            class="reveal opacity-0 translate-y-8 transition-all duration-700 delay-300"
+        >
+            <a
+                href="/contacto"
+                class="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-emerald-600 to-emerald-500 text-white text-lg font-semibold rounded-xl shadow-lg shadow-emerald-600/30 hover:shadow-emerald-600/50 hover:scale-105 transition-all duration-300"
+            >
+                Solicitar Cotización
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <path d="M5 12h14"></path>
+                    <path d="m12 5 7 7-7 7"></path>
+                </svg>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Scroll Indicator -->
+<div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 animate-bounce">
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        class="text-emerald-400"
+    >
+        <path d="m7 13 5 5 5-5"></path>
+        <path d="m7 6 5 5 5-5"></path>
+    </svg>
+</div>
+
+<script>
+    // Hero image carousel
+    let currentIndex = 0;
+    const heroBackgrounds = document.querySelectorAll(".hero-bg");
+    const totalImages = heroBackgrounds.length;
+
+    function changeHeroImage() {
+        // Fade out current image
+        heroBackgrounds[currentIndex].classList.remove("opacity-100");
+        heroBackgrounds[currentIndex].classList.add("opacity-0");
+
+        // Move to next image
+        currentIndex = (currentIndex + 1) % totalImages;
+
+        // Fade in next image
+        heroBackgrounds[currentIndex].classList.remove("opacity-0");
+        heroBackgrounds[currentIndex].classList.add("opacity-100");
+    }
+
+    // Change image every 8 seconds
+    setInterval(changeHeroImage, 8000);
+</script>
+
+<style>
+    .reveal {
+        animation: reveal 0.8s ease forwards;
+    }
+
+    @keyframes reveal {
+        from {
+            opacity: 0;
+            transform: translateY(2rem);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .delay-100 {
+        animation-delay: 0.1s;
+    }
+
+    .delay-200 {
+        animation-delay: 0.2s;
+    }
+
+    .delay-300 {
+        animation-delay: 0.3s;
+    }
+
+    /* Radial gradient for vignette effect */
+    .bg-gradient-radial {
+        background: radial-gradient(
+            circle at center,
+            transparent 0%,
+            transparent 50%,
+            rgba(0, 0, 0, 0.6) 100%
+        );
+    }
+</style>

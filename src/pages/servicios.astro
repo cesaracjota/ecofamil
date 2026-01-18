@@ -1,0 +1,203 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import FloatingButtons from '../components/FloatingButtons.astro';
+
+// Import all service images automatically
+const serviciosImages = import.meta.glob('../assets/servicios/*.{jpeg,jpg,png,webp}', { eager: true });
+const imageList = Object.values(serviciosImages).map((mod: any) => mod.default);
+
+const services = [
+    {
+        title: 'Manejo Integral de Residuos',
+        description: 'Recolección, segregación y gestión completa de residuos sólidos con certificación ambiental.',
+        features: ['Segregación en origen', 'Transporte certificado', 'Disposición final segura']
+    },
+    {
+        title: 'Transporte Especializado',
+        description: 'Flota de vehículos especializados para el transporte seguro de residuos peligrosos y no peligrosos.',
+        features: ['Vehículos autorizados', 'Personal capacitado', 'GPS en tiempo real']
+    },
+    {
+        title: 'Limpieza Industrial',
+        description: 'Limpieza especializada de plantas industriales, campamentos mineros y espacios de trabajo.',
+        features: ['Equipos profesionales', 'Productos biodegradables', 'Servicio 24/7']
+    },
+    {
+        title: 'Pozos Sépticos',
+        description: 'Mantenimiento y limpieza de pozos sépticos y trampas de grasa con equipos de última generación.',
+        features: ['Succión con bombas de vacío', 'Desinfección', 'Servicio programado']
+    },
+    {
+        title: 'Aguas Residuales',
+        description: 'Gestión especializada de aguas residuales con sistema Hidrojet de alta presión.',
+        features: ['Hidrojet profesional', 'Análisis de calidad', 'Tratamiento certificado']
+    },
+    {
+        title: 'Abastecimiento de Agua',
+        description: 'Suministro de agua potable y no potable para operaciones industriales y mineras.',
+        features: ['Agua certificada', 'Entrega puntual', 'Tanques de gran capacidad']
+    },
+    {
+        title: 'Rellenos Sanitarios',
+        description: 'Operación y mantenimiento de rellenos sanitarios con estándares internacionales.',
+        features: ['Gestión certificada', 'Monitoreo ambiental', 'Reportes periódicos']
+    },
+    {
+        title: 'Baños Portátiles',
+        description: 'Alquiler de baños portátiles Integra, Vantage y cabinas completas con servicio de limpieza.',
+        features: ['Modelos premium', 'Limpieza diaria', 'Instalación incluida']
+    },
+];
+---
+
+<Layout 
+    title="Servicios | Ecofamil S.A.C. - Soluciones Ambientales Profesionales"
+    description="Servicios de gestión de residuos, limpieza industrial, transporte especializado, baños portátiles y tratamiento de aguas residuales para minería e industria en Perú."
+>
+    <Navbar />
+    <main>
+        <!-- Hero Section -->
+        <section class="relative min-h-[50vh] flex items-center justify-center bg-gradient-to-b from-neutral-900 to-black py-20 md:py-32">
+            <div class="container mx-auto px-6 text-center">
+                <span class="inline-block px-4 py-2 rounded-full bg-emerald-600/10 border border-emerald-600/30 text-emerald-400 text-sm font-medium mb-6">
+                    Nuestros Servicios
+                </span>
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                    Soluciones <span class="text-emerald-gradient">Ambientales</span><br />
+                    de Clase Mundial
+                </h1>
+                <p class="text-neutral-400 text-lg md:text-xl max-w-2xl mx-auto">
+                    Más de 10 años brindando servicios especializados al sector minero, industrial y de construcción.
+                </p>
+            </div>
+        </section>
+
+        <!-- Services Grid -->
+        <section class="py-20 md:py-32 bg-black">
+            <div class="container mx-auto px-6">
+                <div class="grid md:grid-cols-2 gap-8">
+                    {services.map((service, index) => (
+                        <article 
+                            class="group relative overflow-hidden rounded-2xl bg-neutral-900 border border-neutral-800 hover:border-emerald-600/50 transition-all duration-300 reveal opacity-0 translate-y-8"
+                            style={`transition-delay: ${index * 100}ms`}
+                        >
+                            <!-- Image -->
+                            <div class="relative h-64 overflow-hidden">
+                                <Image 
+                                    src={imageList[index % imageList.length]}
+                                    alt={service.title}
+                                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                    loading="lazy"
+                                    widths={[400, 600]}
+                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                />
+                                <div class="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/50 to-transparent"></div>
+                            </div>
+
+                            <!-- Content -->
+                            <div class="p-6">
+                                <h3 class="text-2xl font-bold mb-3 group-hover:text-emerald-400 transition-colors">
+                                    {service.title}
+                                </h3>
+                                <p class="text-neutral-400 mb-4 leading-relaxed">
+                                    {service.description}
+                                </p>
+
+                                <!-- Features -->
+                                <ul class="space-y-2 mb-6">
+                                    {service.features.map((feature) => (
+                                        <li class="flex items-center gap-2 text-sm text-neutral-300">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-emerald-400 flex-shrink-0">
+                                                <polyline points="20 6 9 17 4 12"/>
+                                            </svg>
+                                            {feature}
+                                        </li>
+                                    ))}
+                                </ul>
+
+                                <!-- CTA -->
+                                <a 
+                                    href={`https://wa.me/51951129150?text=Hola, me interesa el servicio de ${service.title}`}
+                                    target="_blank"
+                                    class="inline-flex items-center gap-2 text-emerald-400 hover:text-emerald-300 font-medium transition-colors group/link"
+                                >
+                                    Solicitar información
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="group-hover/link:translate-x-1 transition-transform">
+                                        <path d="M5 12h14"/>
+                                        <path d="m12 5 7 7-7 7"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </article>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-20 md:py-32 bg-gradient-to-br from-emerald-900/20 to-black">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                    ¿Necesitas una <span class="text-emerald-gradient">Cotización</span>?
+                </h2>
+                <p class="text-neutral-400 text-lg md:text-xl mb-8 max-w-2xl mx-auto">
+                    Contáctanos y te responderemos en minutos con una propuesta personalizada para tu proyecto.
+                </p>
+                <a
+                    href="https://wa.me/51951129150?text=Hola, necesito una cotización"
+                    target="_blank"
+                    class="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-emerald-600 to-emerald-500 text-white text-lg font-bold rounded-xl shadow-2xl shadow-emerald-600/30 hover:shadow-emerald-600/50 hover:scale-105 transition-all duration-300"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                    </svg>
+                    Solicitar Cotización por WhatsApp
+                </a>
+            </div>
+        </section>
+    </main>
+    <Footer />
+    <FloatingButtons />
+</Layout>
+
+<style>
+    .text-emerald-gradient {
+        background: linear-gradient(135deg, #34d399 0%, #059669 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    @keyframes reveal {
+        from {
+            opacity: 0;
+            transform: translateY(2rem);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .reveal {
+        animation: reveal 0.6s ease-out forwards;
+    }
+</style>
+
+<script>
+    // Reveal on scroll
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+</script>

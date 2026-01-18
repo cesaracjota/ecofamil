@@ -1,0 +1,219 @@
+---
+import "../styles/global.css";
+
+interface Props {
+	title: string;
+	description?: string;
+	image?: string;
+	type?: "website" | "article";
+}
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const {
+	title,
+	description = "Ecofamil - Líderes en gestión integral de residuos sólidos, limpieza industrial y servicios ambientales para el sector minero e industrial en Perú. Más de 10 años de experiencia.",
+	image = "/og-image.jpg",
+	type = "website",
+} = Astro.props;
+
+const socialImage = new URL(image, Astro.site);
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<!-- Essential Meta Tags -->
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="generator" content={Astro.generator} />
+
+		<!-- SEO Meta Tags -->
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta
+			name="keywords"
+			content="gestión de residuos, limpieza industrial, servicios ambientales, minería, Cusco, Perú, transporte de residuos, baños portátiles, aguas residuales, economía circular"
+		/>
+		<meta name="author" content="Ecofamil" />
+		<meta name="robots" content="index, follow" />
+		<link rel="canonical" href={canonicalURL} />
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content={type} />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={socialImage} />
+		<meta property="og:site_name" content="Ecofamil" />
+		<meta property="og:locale" content="es_PE" />
+
+		<!-- Twitter Card -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:url" content={canonicalURL} />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={socialImage} />
+
+		<!-- Favicon -->
+		<link rel="icon" type="image/png" href="/favicon.png" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+		<!-- Preconnect to improve performance -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+
+		<!-- Structured Data - Organization -->
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "Organization",
+				"name": "Ecofamil",
+				"description": "Gestión integral de residuos y servicios ambientales",
+				"url": "https://ecofamil.com",
+				"logo": "https://ecofamil.com/logo.png",
+				"image": "https://ecofamil.com/og-image.jpg",
+				"telephone": [
+					"+51-951-129-150",
+					"+51-957-701-113",
+					"+51-965-125-703"
+				],
+				"email": "info@ecofamil.com",
+				"address": {
+					"@type": "PostalAddress",
+					"streetAddress": "Calle Suycutambo S/N, Tres de Mayo",
+					"addressLocality": "Espinar",
+					"addressRegion": "Cusco",
+					"addressCountry": "PE"
+				},
+				"sameAs": [
+					"https://www.facebook.com/ecofamil",
+					"https://www.instagram.com/ecofamil"
+				],
+				"foundingDate": "2013",
+				"areaServed": {
+					"@type": "Country",
+					"name": "Perú"
+				}
+			}
+		</script>
+	</head>
+	<body class="bg-black text-white antialiased">
+		<slot />
+
+		<script>
+			import Lenis from "lenis";
+
+			const lenis = new Lenis({
+				autoRaf: true,
+			});
+
+			// @ts-ignore
+			window.lenis = lenis;
+		</script>
+
+		<!-- Scroll Reveal - Inline for immediate execution -->
+		<script is:inline>
+			(function () {
+				// Robust reveal function
+				function initReveal() {
+					try {
+						// Create observer with robust options
+						const observer = new IntersectionObserver(
+							(entries) => {
+								entries.forEach((entry) => {
+									if (entry.isIntersecting) {
+										const el = entry.target;
+										el.classList.remove(
+											"opacity-0",
+											"translate-y-8",
+										);
+										el.classList.add(
+											"opacity-100",
+											"translate-y-0",
+										);
+										// Unobserve after reveal to improve performance
+										observer.unobserve(el);
+									}
+								});
+							},
+							{
+								threshold: 0.1,
+								rootMargin: "50px", // Trigger slightly before element enters viewport
+							},
+						);
+
+						// Observe all reveal elements
+						const revealElements =
+							document.querySelectorAll(".reveal");
+
+						if (revealElements.length === 0) {
+							console.warn("No .reveal elements found");
+							return;
+						}
+
+						revealElements.forEach((el) => {
+							// Check if element is already in viewport
+							const rect = el.getBoundingClientRect();
+							const inViewport =
+								rect.top < window.innerHeight &&
+								rect.bottom > 0;
+
+							if (inViewport) {
+								// Immediately show elements already in viewport
+								el.classList.remove(
+									"opacity-0",
+									"translate-y-8",
+								);
+								el.classList.add(
+									"opacity-100",
+									"translate-y-0",
+								);
+							} else {
+								// Observe elements below viewport
+								observer.observe(el);
+							}
+						});
+					} catch (error) {
+						console.error("Reveal initialization error:", error);
+						// Fallback: show all elements
+						showAllElements();
+					}
+				}
+
+				// Fallback function to show all elements
+				function showAllElements() {
+					document.querySelectorAll(".reveal").forEach((el) => {
+						el.classList.remove("opacity-0", "translate-y-8");
+						el.classList.add("opacity-100", "translate-y-0");
+					});
+				}
+
+				// Execute on DOM ready
+				if (document.readyState === "loading") {
+					document.addEventListener("DOMContentLoaded", initReveal);
+				} else {
+					// DOM already loaded
+					initReveal();
+				}
+
+				// Safety fallback: show everything after 2 seconds if still hidden
+				setTimeout(() => {
+					const hiddenElements =
+						document.querySelectorAll(".reveal.opacity-0");
+					if (hiddenElements.length > 0) {
+						console.warn(
+							"Forcing reveal of",
+							hiddenElements.length,
+							"hidden elements",
+						);
+						showAllElements();
+					}
+				}, 2000);
+			})();
+		</script>
+	</body>
+</html>

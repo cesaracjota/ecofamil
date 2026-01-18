@@ -1,0 +1,114 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Hero from "../components/Hero.astro";
+import Services from "../components/sections/Services.astro";
+import Footer from "../components/Footer.astro";
+import FloatingButtons from "../components/FloatingButtons.astro";
+---
+
+<Layout
+	title="Ecofamil S.A.C. | Gestión Integral de Residuos en Cusco, Perú"
+	description="Ecofamil S.A.C. ofrece servicios de gestión integral de residuos, limpieza industrial y soluciones ambientales para minería e industria en Cusco. Más de 10 años de experiencia certificada."
+>
+	<Navbar />
+	<main>
+		<Hero />
+		<Services />
+
+		<!-- Clientes Section Placeholder -->
+		<section id="clientes" class="py-20 md:py-32 bg-slate-900/30">
+			<div class="container mx-auto px-6">
+				<div class="text-center max-w-3xl mx-auto mb-16">
+					<h2 class="text-4xl md:text-5xl font-bold mb-4">
+						La Confianza de <span class="text-emerald-gradient"
+							>Nuestros Clientes</span
+						>
+					</h2>
+					<p class="text-xl text-slate-400">
+						Más de 500 empresas confían en nosotros
+					</p>
+				</div>
+
+				<!--Testimonial carousel will go here -->
+				<div class="grid md:grid-cols-3 gap-8">
+					{
+						[1, 2, 3].map(() => (
+							<div class="p-8 rounded-2xl bg-slate-800/50 border border-slate-700/50 hover:border-emerald-600/30 transition-all">
+								<div class="flex gap-1 mb-4">
+									{[...Array(5)].map(() => (
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											width="20"
+											height="20"
+											viewBox="0 0 24 24"
+											fill="currentColor"
+											class="text-emerald-400"
+										>
+											<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+										</svg>
+									))}
+								</div>
+								<p class="text-slate-300 mb-4 italic">
+									"Excelente servicio y profesionalismo.
+									Ecofamil ha sido fundamental en nuestra
+									gestión ambiental."
+								</p>
+								<div class="flex items-center gap-3">
+									<div class="w-12 h-12 rounded-full bg-emerald-600/20" />
+									<div>
+										<div class="font-semibold">
+											Empresa Minera
+										</div>
+										<div class="text-sm text-slate-400">
+											Cusco, Perú
+										</div>
+									</div>
+								</div>
+							</div>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<!-- CTA Section -->
+		<section
+			class="py-20 md:py-32 bg-gradient-to-br from-emerald-900/20 to-slate-950"
+		>
+			<div class="container mx-auto px-6 text-center">
+				<div class="max-w-3xl mx-auto">
+					<h2 class="text-4xl md:text-5xl font-bold mb-6">
+						¿Listo para <span class="text-emerald-gradient"
+							>Trabajar Juntos</span
+						>?
+					</h2>
+					<p class="text-xl text-slate-400 mb-8">
+						Contáctanos para una asesoría personalizada sobre tus
+						necesidades de gestión ambiental
+					</p>
+					<a
+						href="/contacto"
+						class="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-emerald-600 to-emerald-500 text-white text-lg font-bold rounded-xl shadow-2xl shadow-emerald-600/30 hover:shadow-emerald-600/50 hover:scale-105 transition-all duration-300"
+					>
+						Solicitar Cotización Ahora
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="24"
+							height="24"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+						>
+							<path d="M5 12h14"></path>
+							<path d="m12 5 7 7-7 7"></path>
+						</svg>
+					</a>
+				</div>
+			</div>
+		</section>
+	</main>
+	<Footer />
+	<FloatingButtons />
+</Layout>
